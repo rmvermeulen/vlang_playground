@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -e;
-git stash --keep-index;
+# will be popped by post-commit
+git stash --message "[[pre-commit]]" --keep-index --include-untracked;
 v fmt -w .;
 git update-index --again;
 git checkout .;
-git stash pop;

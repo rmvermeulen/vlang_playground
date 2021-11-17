@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+set -e;
+
+# contains(string, substring)
+#
+# Returns 0 if the specified string contains the specified substring,
+# otherwise returns 1.
+contains() {
+    string="$1"
+    substring="$2"
+    if test "${string#*$substring}" != "$string"
+    then
+        return 0    # $substring is in $string
+    else
+        return 1    # $substring is not in $string
+    fi
+}
+
+top_stash=$(git stash list | head -1)
+echo "top_stash:"
+echo $top_stash
+echo "----"
+
+contains "$top_stash" "[[pre-commit]]" && {
+    git stash pop
+}
