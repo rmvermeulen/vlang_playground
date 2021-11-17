@@ -14,7 +14,7 @@ pub struct Service {}
 pub struct Container {
 mut:
 	services  map[string]Service
-	factories map[string]Factory<di.Service>
+	factories map[string]Factory<Service>
 }
 
 pub type Factory = fn (ctx Context) &Service
